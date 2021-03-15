@@ -21,22 +21,29 @@
       <script src="http://code.jquery.com/jquery-3.4.1.min.js"  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
 
       <script>
-        $('#generateReport').click(function(){
-            console.log('click')
-            $.ajax({
-            url: '{{ url("/api/report") }}',
-            method: 'GET',
-            dataType: 'json',
-            data: {
-              createJSON: 1
-            },
-            success: function (r) {
-              console.log('success')
-              console.log(r)
-              $('#content').html(r)
-            }
+        $(document).ready(function() {
+          $('#report').hide()
+            $('#showReport').click(function(){
+              $('#showReport').toggleClass('selected')
+                $.ajax({
+                url: '{{ url("/api/report") }}',
+                method: 'GET',
+                dataType: 'json',
+                data: {
+                  createJSON: 1
+                },
+                success: function (r) {
+                  let output = "<ul>"
+                  r.forEach(function(value) {
+                    output += "<li>" + value +"</li>"
+                  })
+                  output += "</ul>"
+                  $('#report').html(output)
+                  $('#report').slideToggle(400)
+                }
+            })
+          })
         })
-      })
     </script>
       <script type="module">
         import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/build/three.module.js';
