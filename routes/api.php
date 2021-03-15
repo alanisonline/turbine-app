@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TurbineController;
 
@@ -15,8 +14,8 @@ use App\Http\Controllers\TurbineController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
 
-Route::get('report', [TurbineController::class , 'getReport']);
+Route::get('report', [TurbineController::class, 'getReport']);

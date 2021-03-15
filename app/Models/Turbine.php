@@ -25,35 +25,44 @@ class Turbine extends Model
     public function __construct(int $numberOfComponents = 100, int $id = 0)
     {
         $this->id = $id;
-    
+        $this->generateReport($numberOfComponents);
+    }
+
+
+    /**
+     * @param int $numberOfComponents
+     */
+    private function generateReport(int $numberOfComponents)
+    {
         $y = 1;
         while ($y <= $numberOfComponents) {
             $component = new Component($y, $this->id);
-            if ($y%3 == 0) {
+            if ($y % 3 == 0) {
                 $component->recordDamage("Coating Damage");
             }
-            if ($y%5 == 0) {
+            if ($y % 5 == 0) {
                 $component->recordDamage("Lightning Damage");
             }
-            
+
             array_push($this->components, $component);
             $y++;
         }
     }
 
-    public function getReport() {
+    /**
+     * @return string[]
+     */
+    public function getReport()
+    {
         $report = [];
-        if(count($this->components) < 1) return;
-        foreach($this->components as $component) {
-            if (empty($component->getDamages())) {
-                array_push($report, $component->getId());
+        if (empty($this->components)) return;
+        foreach ($this->components as $component) {
+            if ($component->hasDamage()) {
+                array_push($report, "{$component->getId()}");
             } else {
-                array_push($report, $component->getDamages());
+                array_push($report, $component->damagesAsString());
             }
         }
         return $report;
-        $componentId = $component->getId();
-        $damages = implode(' and ', ["test", "ing"]);
-        return ["{$componentId} => {$damages}"];
     }
 }
