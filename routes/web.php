@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $url = 'https://dev.virtualearth.net/REST/V1/Imagery/Map/Aerial/55.923528%2C-3.399739/16?mapSize=500,500&format=png&key={BINGAPIKEY}';
+            
+    $img = "assets/img/map-texture.png";
+
+    file_put_contents($img, file_get_contents($url));
+    
     return view('welcome');
 });
