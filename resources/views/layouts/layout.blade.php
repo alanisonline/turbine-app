@@ -15,128 +15,145 @@
         <link rel="stylesheet" href="{{ asset('/css/ui-style.css') }}">
     </head>
     <body class="antialiased">
-        <div class="container">
-            @yield('content')
-        </div>
-        <script type="module">
-         import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/build/three.module.js';
-import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/examples/jsm/controls/OrbitControls.js';
-import {OBJLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/examples/jsm/loaders/OBJLoader.js';
-import {MTLLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/examples/jsm/loaders/MTLLoader.js';
+      <div class="container">
+          @yield('content')
+      </div>
+      <script src="http://code.jquery.com/jquery-3.4.1.min.js"  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
 
-function main() {
-  const canvas = document.querySelector('#c');
-  const renderer = new THREE.WebGLRenderer({canvas});
+      <script>
+        $('#generateReport').click(function(){
+            console.log('click')
+            $.ajax({
+            url: '{{ url("/api/report") }}',
+            method: 'GET',
+            dataType: 'json',
+            data: {
+              createJSON: 1
+            },
+            success: function (r) {
+              console.log('success')
+              console.log(r)
+              $('#content').html(r)
+            }
+        })
+      })
+    </script>
+      <script type="module">
+        import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/build/three.module.js';
+        import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/examples/jsm/controls/OrbitControls.js';
+        import {OBJLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/examples/jsm/loaders/OBJLoader.js';
+        import {MTLLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/examples/jsm/loaders/MTLLoader.js';
 
-  const fov = 45;
-  const aspect = 2;  // the canvas default
-  const near = 0.1;
-  const far = 100;
-  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-  camera.position.set(10, 1, 0);
+        function main() {
+          const canvas = document.querySelector('#c');
+          const renderer = new THREE.WebGLRenderer({canvas});
 
-  const controls = new OrbitControls(camera, canvas);
-  controls.target.set(0, 2, 0);
-  controls.update();
+          const fov = 45;
+          const aspect = 2;  // the canvas default
+          const near = 0.1;
+          const far = 100;
+          const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+          camera.position.set(10, 1, 0);
 
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color('#22e');
+          const controls = new OrbitControls(camera, canvas);
+          controls.target.set(0, 2, 0);
+          controls.update();
 
-  {
-    const planeSize = 40;
+          const scene = new THREE.Scene();
+          scene.background = new THREE.Color('#22e');
 
-    const loader = new THREE.TextureLoader();
-    let texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/checker.png');
-    texture = loadTexture(loader, texture);
-      
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.magFilter = THREE.NearestFilter;
-    const repeats = planeSize / 2;
-    // texture.repeat.set(repeats, repeats);
+          {
+            const planeSize = 40;
 
-    const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
-    const planeMat = new THREE.MeshPhongMaterial({
-      map: texture,
-      side: THREE.DoubleSide,
-    });
-    const mesh = new THREE.Mesh(planeGeo, planeMat);
-    mesh.rotation.x = Math.PI * -.5;
-    scene.add(mesh);
-  }
+            const loader = new THREE.TextureLoader();
+            let texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/checker.png');
+            texture = loadTexture(loader, texture);
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.wrapT = THREE.RepeatWrapping;
+            texture.magFilter = THREE.NearestFilter;
+            const repeats = planeSize / 2;
 
-  function loadTexture(loader, texture) {
-    // let image = './assets/16.jfif';
-    let image = 'assets/img/map-texture.png';
-    let mapTexture = loader.load(image);
-    console.log(mapTexture.image == undefined);
-    console.log(mapTexture.error == null);
-    console.log(mapTexture);
-    if (mapTexture.image == undefined) {
-      texture = mapTexture;
-      console.log(texture.uuid)
-    }
-    return texture;
-  }
+            const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
+            const planeMat = new THREE.MeshPhongMaterial({
+              map: texture,
+              side: THREE.DoubleSide,
+            });
+            const mesh = new THREE.Mesh(planeGeo, planeMat);
+            mesh.rotation.x = Math.PI * -.5;
+            scene.add(mesh);
+          }
 
-  {
-    const skyColor = 0xB1E1FF;  // light blue
-    const groundColor = 0xB97A20;  // brownish orange
-    const intensity = 1;
-    const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
-    scene.add(light);
-  }
+          function loadTexture(loader, texture) {
+            let image = 'assets/img/map-texture.png';
+            let mapTexture = loader.load(image);
+            console.log(mapTexture.image == undefined);
+            console.log(mapTexture.error == null);
+            console.log(mapTexture);
+            if (mapTexture.image == undefined) {
+              texture = mapTexture;
+              console.log(texture.uuid)
+            }
+            return texture;
+          }
 
-  {
-    const color = 0xFFFFFF;
-    const intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(0, 10, 0);
-    light.target.position.set(-5, 0, 0);
-    scene.add(light);
-    scene.add(light.target);
-  }
-  {
-    const mtlLoader = new MTLLoader();
-    mtlLoader.load('assets/3d/TurbineRed.mtl', (mtl) => {
-      mtl.preload();
-      const objLoader = new OBJLoader();
-      mtl.materials.Material.side = THREE.DoubleSide;
-      objLoader.setMaterials(mtl);
-      objLoader.load('assets/3d/TurbineRed.obj', (root) => {
-        scene.add(root);
-      });
-    });
-  }
+          {
+            const skyColor = 0xB1E1FF;  // light blue
+            const groundColor = 0xB97A20;  // brownish orange
+            const intensity = 1;
+            const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+            scene.add(light);
+          }
 
-  function resizeRendererToDisplaySize(renderer) {
-    const canvas = renderer.domElement;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-    const needResize = canvas.width !== width || canvas.height !== height;
-    if (needResize) {
-      renderer.setSize(width, height, false);
-    }
-    return needResize;
-  }
+          {
+            const color = 0xFFFFFF;
+            const intensity = 1;
+            const light = new THREE.DirectionalLight(color, intensity);
+            light.position.set(0, 10, 0);
+            light.target.position.set(-5, 0, 0);
+            scene.add(light);
+            scene.add(light.target);
+          }
+          {
+            const mtlLoader = new MTLLoader();
+            mtlLoader.load('assets/3d/TurbineRed.mtl', (mtl) => {
+              mtl.preload();
+              const objLoader = new OBJLoader();
+              mtl.materials.Material.side = THREE.DoubleSide;
+              objLoader.setMaterials(mtl);
+              objLoader.load('assets/3d/TurbineRed.obj', (root) => {
+                scene.add(root);
+              });
+            });
+          }
 
-  function render() {
+          function resizeRendererToDisplaySize(renderer) {
+            const canvas = renderer.domElement;
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            const needResize = canvas.width !== width || canvas.height !== height;
+            if (needResize) {
+              renderer.setSize(width, height, false);
+            }
+            return needResize;
+          }
 
-    if (resizeRendererToDisplaySize(renderer)) {
-      const canvas = renderer.domElement;
-      camera.aspect = canvas.clientWidth / canvas.clientHeight;
-      camera.updateProjectionMatrix();
-    }
+          function render() {
 
-    renderer.render(scene, camera);
+            if (resizeRendererToDisplaySize(renderer)) {
+              const canvas = renderer.domElement;
+              camera.aspect = canvas.clientWidth / canvas.clientHeight;
+              camera.updateProjectionMatrix();
+            }
 
-    requestAnimationFrame(render);
-  }
+            renderer.render(scene, camera);
 
-  requestAnimationFrame(render);
-}
+            requestAnimationFrame(render);
+          }
 
-main();
-</script>
-    </body>
+          requestAnimationFrame(render);
+        }
+
+        main();
+    </script>
+  </body>
 </html>
