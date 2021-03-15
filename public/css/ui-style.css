@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed&display=swap');
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12pt;
+}
+.container {
+
+}
+.ui-menu {
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 8px 8px 8px 8px;
+}
+.ui-menu-header {
+    font-family: 'Roboto', 'Roboto Condensed', sans-serif;
+    font-size: 1.4em;
+    height: 66px;
+    display: grid;
+    place-items: center left; 
+    padding-left: 14px;
+    padding-right: 14px;
+    border:1px solid;
+    border-bottom: 4px solid;
+    border-color: #000000;
+    border-radius: 8px 8px 0px 0px;
+}
+.ui-menu-footer {
+    display: grid;
+    place-items: center; 
+    border: 1px solid #000000;
+    border-radius: 0px 0px 8px 8px;
+}
+.ui-menu-footer img {
+    height: 50%;
+}
+.ui-menu ul {
+    list-style: none;
+    border-radius: 4px;
+    padding: 0px;
+    margin: 0px;
+    background-color: #444444;
+    text-transform: uppercase;
+}
+.ui-menu li {
+    width: auto;
+    height: 48px;
+    margin-bottom: 1px;
+    background-color: #555555;
+    display: grid;
+    place-items: center left; 
+    padding-left: 14px;
+    padding-right: 14px;
+}
+.ui-menu li:hover {
+    background-color: #666666;
+}
+.ui-menu li.selected {
+    background-color: #fdd138;
+    color: #000000;
+}
+.ui-menu .icon {
+    color: #222222;
+}
+
+@media screen and (min-width: 641px) {
+    .ui-menu {
+        position: absolute;
+        top: 40vh;
+        left: 5vw;
+        width: 275px;
+    }
+    #c {
+        width:100vw;
+        height:100vh;
+    }
+}
+@media screen and (max-width: 640px) {
+    .ui-menu, .ui-menu-header, .ui-menu-footer {
+        border-radius: 0px;
+    }
+    .ui-menu {
+        position: relative;
+        float:left;
+        width: 100vw;
+    }
+    .ui-menu ul,li {
+        width:auto;
+    }
+    #c {
+        width:100vw;
+        height:50vh;
+    }
+}
