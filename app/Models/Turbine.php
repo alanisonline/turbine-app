@@ -28,6 +28,12 @@ class Turbine extends Model
         $this->generateReport($numberOfComponents);
     }
 
+    /**
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
 
     /**
      * @param int $numberOfComponents

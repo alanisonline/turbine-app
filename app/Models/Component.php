@@ -35,6 +35,14 @@ class Component extends Model
     }
 
     /**
+     * @return int
+     */
+    public function getTurbineId()
+    {
+        return $this->turbineId;
+    }
+
+    /**
      * @param string $damage
      */
     public function recordDamage(string $damage)
