@@ -22,17 +22,17 @@ So when outputting, this code will loop through all of the components and check 
 
 ## Development
 
-To piece it all together I used Laravel as it is create for structuring the project and combining the front and back end. It's also helpful for setting up the AJAX call and for testing.
+To piece it all together I used Laravel as it is great for structuring the project and combining the front and back end. It is also helpful for setting up the AJAX call and for testing.
 
-For styling I used the app of the company that provided the test as inspiration, trying to match their font, colour scheme and logo. I designed the logo in Adobe Illustrator outputting as an SVG, which I used again later as a loading spinner for the AJAX call. The spinner was animated with CSS3 animations. The UI menu animations are standard jQuery animations, which wait for the AJAX call to finish when expanding, and skipping the AJAX call when retracting. 
+For styling I used the app of the company that provided the test as inspiration, trying to match their font, colour scheme and logo. I designed the logo in Adobe Illustrator outputting as an SVG, which I used again later as a loading spinner for the AJAX call. The spinner was animated with CSS3 animations. The UI menu animations are standard jQuery animations, which wait for the AJAX call to finish when expanding and skipping the AJAX call when retracting. 
 
-To further personalise it I used the Bing Static Map API to retrieve a map image of a relevant location. I did this with a route when the application first loads, which THREEjs then uses as a plane texture, so it appears that the 3D Turbine is placed in that location, and the API Key is stored in environemnt variables. 
+To further personalise it I used the Bing Static Map API to retrieve a map image of a relevant location. I did this with a route when the application first loads, which THREEjs then uses as a plane texture. This gives the appearance that the 3D Turbine is placed in that location, and the API Key is stored in environment variables. 
 
 ## Further thoughts
 
-For further personalisation I would like to have animated the wind turbine and use a weather API to get the wind speed for the location, which would in turn adjust the speed that the turbine would rotate. I would need to seperate the 3d Model in to at least 2 seperate .obj files to accomplish this, propellers and the rest, and then position the propellers appropriately, specifiing an origin around the turbine's 
+For further personalisation I would like to have animated the wind turbine and use a weather API to get the wind speed for the location, which would in turn adjust the speed that the turbine would rotate. I would need to seperate the 3d Model in to at least 2 seperate .obj files to accomplish this, propellers and the rest, and then position the propellers appropriately, specifying an origin around the turbine's rotor. 
 
-I removed the Site object model and controller from the application, as it wasn't necessary to the scope of this project. This project focusses on the Turbine and it's Components. However if I was to continue the project I would like to add the Site object back into the structure. I think it's a sensible way to represent the data and can be useful for 1 turbine or several. It could also be applicable for a location that doesn't have any turbines. Perhaps there would be other relevant structures to consider, in which case the Site object would have to be open to that. That could be an appropriate time to use a Factory pattern. 
+I removed the Site object model and controller from the application, as it wasn't necessary to the scope of this project. This project focusses on the Turbine and it's Components. However if I was to continue the project I would like to add the Site object back into the structure. I think it is a sensible way to represent the data and can be useful for 1 turbine or several. It could also be applicable for a location that doesn't have any turbines. Perhaps there would be other relevant structures to consider, in which case the Site object would have to be open to that. That could be an appropriate time to use a Factory pattern. 
 
 I think it would be useful to populate the UI Menu with buttons based on what Sites and Turbines exist, and have an accordian style expansion. When you select a site, you see the relevant turbines, and when you select a turbine you see the appropriate report. 
 
