@@ -20,7 +20,7 @@ class Component extends Model
      * @param int $id
      * @param int $turbineId
      */
-    public function __construct(int $id = 0 , int $turbineId)
+    public function __construct(int $id = 0, int $turbineId)
     {
         $this->id = $id;
         $this->turbineId = $turbineId;
@@ -29,7 +29,8 @@ class Component extends Model
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -54,9 +55,6 @@ class Component extends Model
      */
     public function hasDamage()
     {
-        if (empty($this->damages)) {
-            return true;
-        }
-        return false;
+        return empty($this->damages) ? false : true;
     }
 }

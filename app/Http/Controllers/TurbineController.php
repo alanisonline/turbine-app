@@ -6,9 +6,12 @@ use App\Models\Turbine;
 
 class TurbineController extends Controller
 {
-    public function getReport()
+    /**
+     * @return string
+     */
+    public function report()
     {
         $turbine = new Turbine();
-        return $turbine->getReport();
+        return $turbine->report();
     }
 }

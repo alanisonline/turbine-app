@@ -2,9 +2,43 @@
 body {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 12pt;
+    background-color: #222222;
 }
 
-.container {}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    border: 2px solid #444444;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+.load-anim {
+    display: none;
+    position: relative;
+    float: right;
+    width: 20px;
+    height: 20px;
+}
 
 #report {
     overflow-y: scroll;
@@ -61,6 +95,12 @@ body {
     padding-right: 14px;
 }
 
+.ui-menu li div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 20px;
+}
+
 .ui-menu li:hover {
     background-color: #666666;
 }
@@ -75,6 +115,9 @@ body {
 }
 
 @media screen and (min-width: 641px) {
+    body {
+        overflow: hidden;
+    }
     .ui-menu {
         position: absolute;
         top: 20vh;
@@ -107,6 +150,6 @@ body {
         height: 50vh;
     }
     #report {
-        max-height: fit-content;
+        max-height: max-content;
     }
 }

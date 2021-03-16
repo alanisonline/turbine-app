@@ -37,10 +37,10 @@ class Turbine extends Model
         $y = 1;
         while ($y <= $numberOfComponents) {
             $component = new Component($y, $this->id);
-            if ($y % 3 == 0) {
+            if ($y % 3 === 0) {
                 $component->recordDamage("Coating Damage");
             }
-            if ($y % 5 == 0) {
+            if ($y % 5 === 0) {
                 $component->recordDamage("Lightning Damage");
             }
 
@@ -50,19 +50,19 @@ class Turbine extends Model
     }
 
     /**
-     * @return string[]
+     * @return string
      */
-    public function getReport()
+    public function report()
     {
         $report = [];
         if (empty($this->components)) return;
         foreach ($this->components as $component) {
             if ($component->hasDamage()) {
-                array_push($report, "{$component->getId()}");
-            } else {
                 array_push($report, $component->damagesAsString());
+            } else {
+                array_push($report, "{$component->getId()}");
             }
         }
-        return $report;
+        return json_encode($report);
     }
 }

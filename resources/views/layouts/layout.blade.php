@@ -20,11 +20,14 @@
     <script>
         $(document).ready(function() {
             $('#report').hide()
-            $('#showReport').click(function() {
-                $('#showReport').toggleClass('selected')
+            $('.load-anim').hide()
+
+            $('.ui-menu').click(function() {
+                $('.ui-menu li').toggleClass('selected')
+                $('.load-anim').css('display', 'inline')
                 if ($('#report').css('display') == "none") {
                     $.ajax({
-                        url: '{{ url("/api/report") }}',
+                        url: '{{ url("/api/turbine/report") }}',
                         method: 'GET',
                         dataType: 'json',
                         data: {
@@ -37,11 +40,15 @@
                             })
                             output += "</ul>"
                             $('#report').html(output)
-                            $('#report').slideDown(400)
+                            $('#report').slideDown(400, function() {
+                                $('.load-anim').css('display', 'none')
+                            })
                         }
                     })
                 } else {
-                    $('#report').slideUp(400)
+                    $('#report').slideUp(400, function() {
+                        $('.load-anim').css('display', 'none')
+                    })
                 }
             })
         })

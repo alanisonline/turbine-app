@@ -18,4 +18,4 @@ if (App::environment('production')) {
     URL::forceScheme('https');
 }
 
-Route::get('report', [TurbineController::class, 'getReport']);
+Route::get('turbine/report', [TurbineController::class, 'report']);
