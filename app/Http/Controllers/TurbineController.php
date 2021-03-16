@@ -11,7 +11,6 @@ class TurbineController extends Controller
      */
     public function report()
     {
-        $turbine = new Turbine();
-        return $turbine->report();
+        return (new Turbine())->report();
     }
 }
