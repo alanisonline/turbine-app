@@ -22,8 +22,8 @@
             $('#report').hide()
             $('.load-anim').hide()
 
-            $('.ui-menu').click(function() {
-                $('.ui-menu li').toggleClass('selected')
+            $('#showReport').click(function() {
+                $('#showReport').toggleClass('selected')
                 $('.load-anim').css('display', 'inline')
                 if ($('#report').css('display') == "none") {
                     $.ajax({
