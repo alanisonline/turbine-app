@@ -12,7 +12,7 @@ class ComponentTest extends TestCase
      */
     public function test_correct_id_is_returned()
     {
-        $this->assertEquals(100, (new Component(100, 57))->getId(), "Correct ID has been returned");
+        $this->assertEquals(100, (new Component(100, 57))->getId());
     }
 
     /**

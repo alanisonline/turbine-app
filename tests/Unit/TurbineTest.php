@@ -14,7 +14,7 @@ class TurbineTest extends TestCase
      */
     public function test_correct_id_is_returned()
     {
-        $this->assertEquals(57, (new Turbine(100, 57))->getId(), "Correct ID has been returned");
+        $this->assertEquals(57, (new Turbine(100, 57))->getId());
     }
 
     /**
