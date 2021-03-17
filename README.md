@@ -30,19 +30,19 @@ To further personalise it I used the Bing Static Map API to retrieve a map image
 
 ## Further thoughts
 
-For further personalisation I would like to have animated the wind turbine and use a weather API to get the wind speed for the location, which would in turn adjust the speed that the turbine would rotate. I would need to seperate the 3d Model in to at least 2 seperate .obj files to accomplish this, propellers and the rest, and then position the propellers appropriately, specifying an origin around the turbine's rotor. 
+For further personalisation I would like to have animated the wind turbine and use a weather API to get the wind speed for the location, which would in turn adjust the speed that the turbine would rotate. I would need to seperate the 3d Model in to at least 2 seperate .obj files to accomplish this, propellers and the rest, and then position the propellers appropriately, specifying an origin around the turbine's rotor and rotating it on the appropriate axis. 
 
 I removed the Site object model and controller from the application, as it wasn't necessary to the scope of this project. This project focusses on the Turbine and it's Components. However if I was to continue the project I would like to add the Site object back into the structure. I think it is a sensible way to represent the data and can be useful for 1 turbine or several. It could also be applicable for a location that doesn't have any turbines. Perhaps there would be other relevant structures to consider, in which case the Site object would have to be open to that. That could be an appropriate time to use a Factory pattern. 
 
 I think it would be useful to populate the UI Menu with buttons based on what Sites and Turbines exist, and have an accordian style expansion. When you select a site, you see the relevant turbines, and when you select a turbine you see the appropriate report. 
 
-I would like the report to display seperately from the menu, and for both the menu and the report to be draggable windelements the user can position on tablet and desktop sizes. 
+I would like the report to display seperately from the menu, and for both the menu and the report to be draggable UI elements the user can position on tablet and desktop sizes. 
 
-Site, Turbine and Component should all be represented in a database, where they can be stored and associated with a User/Customer account. So I'd like the site to have a login for customers and their employees
+Site, Turbine and Component should all be represented in a database, where they can be stored and associated with a User/Customer account. So I'd like the site to have a login for customers and their employees. 
 
-The Bing Static Map API could be more modular. Turbines could have coordinates stored against them, and the API would look for the appropriate map to match the location.
+The Bing Static Map API could be more modular. Turbines could have coordinates stored against them, and the API would look for the appropriate map to match the location. I would perhaps do this retrieval within a class or within the javascript using the environment variable to keep the API key hidden. 
 
-Wind turbines sharing a site could all be mapped out on screen at once, allowing the user to fly between them, either via 3D navigation or a 2D selector that would pan the camera from one turbine to the next. Main components could change colour based on what type of damages or how many damages are recorded against them. Perhaps this would simply be about severity of the type of damage. They would then see a list, perhaps with notes or photographs regarding the damage. There could be an option to schedule maintenance at this point. 
+Wind turbines sharing a site could all be mapped out on screen at once, allowing the user to fly between them, either via 3D navigation or a 2D selector that would pan the camera from one turbine to the next. Main components could change colour or be textured based on what type of damages or how many damages are recorded against them. Perhaps this would simply be about severity of the type of damage. They would then see a list, perhaps with notes or photographs regarding the damage. There could be an option to schedule maintenance at this point. 
 
 ## Steps to run locally
 
